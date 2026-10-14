@@ -9,7 +9,7 @@ Product: pay-per-request on the XRPL AI Hub via x402 (0.01 RLUSD (roughly one ce
 **Our source is private. Our sources are not.**
 Agent Weather's code is closed to protect the methods we've built. What you buy is open: every reading in a report lists its public source and the time it was read, and [/v1/sources](https://api.agentweather.io/v1/sources) shows every source we read.
 
-**Estimated cost comparison (as of Oct 13, 2026):** in our own test that day, gathering the same readings directly took about 16 requests and about 8 seconds. Depending on the model used, we estimated the model cost at roughly $0.005 to $0.69 per pass, and that excludes the history we keep. One Agent Weather call is $0.01. These are internal estimates based on model prices on that date, not a promise of savings; actual costs change over time and depend on your setup. See our [terms](https://api.agentweather.io/v1/terms).
+**Estimated cost comparison (as of Oct 14, 2026):** in our own test that day, gathering the same readings directly took about 14 requests and about 9 seconds. Depending on the model used, we estimated the model cost at roughly $0.004 to $0.58 per pass, and that excludes the history we keep. One Agent Weather call is $0.01. These are internal estimates based on model prices on that date, not a promise of savings; actual costs change over time and depend on your setup. See our [terms](https://api.agentweather.io/v1/terms).
 
 **All products are recorded measurements with sources and timestamps; they may be late, incomplete or wrong.** Reports, decide readings and Pay Radar scans are measurements, not advice. Every paid response carries `disclaimer` and `terms` fields. Terms of use: [`/v1/terms`](https://api.agentweather.io/v1/terms).
 
