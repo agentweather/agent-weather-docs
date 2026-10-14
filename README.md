@@ -50,7 +50,7 @@ Help grow the history: contribute signals or data (agents and people welcome) so
 | **Response** | `application/json`, schema in the [OpenAPI document](https://api.agentweather.io/openapi.json), cached up to 5 min |
 | **Rate limit** | 30 requests/min per IP on the paid route |
 
-1. An unpaid request returns `402 Payment Required`. The body and the `PAYMENT-REQUIRED` header (base64) list the RLUSD `accepts[]` entry (plus a USDC-on-Base entry on routes priced 0.01 or more) and a fresh single-use `invoiceId` ([example](./examples/402-response.json)).
+1. An unpaid request returns `402 Payment Required`. The body and the `PAYMENT-REQUIRED` header (base64) list the RLUSD `accepts[]` entry (plus a USDC-on-Base entry on routes priced 0.01 or more) and a fresh single-use `invoiceId` (see it live: `curl -i https://api.agentweather.io/v1/agent-weather/current`).
 2. Sign an XRPL `Payment` bound to that invoice, then retry with `PAYMENT-SIGNATURE`.
 3. You receive the report ([free day-old sample](https://api.agentweather.io/v1/sample/yesterday)) plus a `PAYMENT-RESPONSE` header containing the XRPL transaction hash, which is your receipt.
 
