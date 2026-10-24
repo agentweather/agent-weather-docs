@@ -1,15 +1,15 @@
 # Agent Weather
 
-Agent Weather is open-source intelligence on AI agents and x402 payments. We read public sources on a schedule (public status pages, GitHub, npm, the MCP Registry, the OpenRouter model list and the XRP Ledger) and keep every reading with its source and timestamp. That record is the product: each paid call returns the latest raw readings plus what the record shows over 24h and 7d. Derived values show their formula; gaps are reported, not filled.
+Agent Weather is open-source intelligence on AI agents and x402 payments. We read public sources on a schedule (public status pages, GitHub, npm, the MCP Registry, the models.dev model catalog (MIT) and the XRP Ledger) and keep every reading with its source and timestamp. That record is the product: each paid call returns the latest raw readings plus what the record shows over 24h and 7d. Derived values show their formula; gaps are reported, not filled.
 
 We collect verifiable signals—agent frameworks and marketplaces, on-chain agent and x402 payment activity, public API/usage stats, GitHub activity, agent directories—and turn them into agent-consumable conditions reports: near real-time (or at least daily) intelligence on current agent-ecosystem conditions, as structured JSON with sources, timestamps, and confidence. Modeled or estimated values are labeled.
 
-Product: pay-per-request on the XRPL AI Hub via x402 (0.01 RLUSD (roughly one cent) on core routes; routes priced 0.01 or more also accept 0.01 USDC on Base). Live API: https://api.agentweather.io (v1.3.0) · Discovery: `/.well-known/x402` · Free sample: `/v1/sample/yesterday` · New in 1.3.0: [model-metrics directory](#model-metrics-directory-new-in-130) (`/v1/models`)
+Product: pay-per-request on the XRPL AI Hub via x402 (RLUSD on the XRP Ledger or USDC on Base, same price, on every paid route; the combined record is 0.007 RLUSD or 0.007 USDC; current prices: `/.well-known/x402`). Live API: https://api.agentweather.io (v1.3.0) · Discovery: `/.well-known/x402` · Free sample: `/v1/sample/yesterday` · New in 1.3.0: [model-metrics directory](#model-metrics-directory-new-in-130) (`/v1/models`)
 
 **Our source is private. Our sources are not.**
 Agent Weather's code is closed to protect the methods we've built. What you buy is open: every reading in a report lists its public source and the time it was read, and [/v1/sources](https://api.agentweather.io/v1/sources) shows every source we read.
 
-**Estimated cost comparison (as of Oct 14, 2026):** in our own test that day, gathering the same readings directly took about 14 requests and about 9 seconds. Depending on the model used, we estimated the model cost at roughly $0.004 to $0.58 per pass, and that excludes the history we keep. One Agent Weather call is $0.01. These are internal estimates based on model prices on that date, not a promise of savings; actual costs change over time and depend on your setup. See our [terms](https://api.agentweather.io/v1/terms).
+**Estimated cost comparison (as of Oct 14, 2026):** in our own test that day, gathering the same readings directly took about 14 requests and about 9 seconds. Depending on the model used, we estimated the model cost at roughly 0.004 to 0.58 USDC equivalent per pass, and that excludes the history we keep. One Agent Weather call to `/v1/agent-weather/current` is 0.007 RLUSD or 0.007 USDC. These are internal estimates based on model prices on that date, not a promise of savings; actual costs change over time and depend on your setup. See our [terms](https://api.agentweather.io/v1/terms).
 
 **All products are recorded measurements with sources and timestamps; they may be late, incomplete or wrong.** Reports, decide readings and Pay Radar scans are measurements, not advice. Every paid response carries `disclaimer` and `terms` fields. Terms of use: [`/v1/terms`](https://api.agentweather.io/v1/terms).
 
@@ -32,25 +32,25 @@ Help grow the history: contribute signals or data (agents and people welcome) so
 | | |
 |---|---|
 | **Endpoint** | `GET https://api.agentweather.io/v1/agent-weather/current` (POST behaves identically) |
-| **Price** | `0.01 RLUSD` or `0.01 USDC` on Base per call (other routes: see [`openapi.yaml`](https://api.agentweather.io/openapi.json) / live catalog) |
+| **Price** | `0.007 RLUSD` or `0.007 USDC` on Base per call (other routes: see [`openapi.yaml`](https://api.agentweather.io/openapi.json) / live catalog) |
 | **Free sample** | `GET https://api.agentweather.io/v1/sample/yesterday`: yesterday's report in the same format, no payment |
-| **Pay Radar** | `GET https://api.agentweather.io/v1/payradar?url={endpoint}` (0.003 RLUSD): pre-flight scan of an XRPL x402 endpoint before paying. Free demo `/v1/payradar/demo`. The old path `/v1/paycheck` still works |
-| **Pre-flight decide** | `/v1/decide/cheapest-model` (0.003 RLUSD), `/v1/decide/provider-health` (0.001 RLUSD) |
+| **Pay Radar** | `GET https://api.agentweather.io/v1/payradar?url={endpoint}` (0.003 RLUSD or USDC): pre-flight scan of an XRPL x402 endpoint before paying. Free demo `/v1/payradar/demo`. The old path `/v1/paycheck` still works |
+| **Pre-flight decide** | `/v1/decide/cheapest-model` (0.003 RLUSD or USDC), `/v1/decide/provider-health` (0.005 RLUSD or USDC) |
 | **MCP server** | `https://mcp.agentweather.io/mcp` (streamable HTTP, v0.4.2, 20 tools); server card at `/.well-known/mcp/server-card.json` |
 | **Terms** | `GET https://api.agentweather.io/v1/terms` (free) |
-| **Model directory (new in 1.3.0)** | `GET https://api.agentweather.io/v1/models` (free); per-model and per-category reports 0.01 RLUSD each, see [below](#model-metrics-directory-new-in-130) |
+| **Model directory (new in 1.3.0)** | `GET https://api.agentweather.io/v1/models` (free); per-model and per-category reports 0.01 RLUSD or USDC each, see [below](#model-metrics-directory-new-in-130) |
 | **API version** | `1.3.0` (`GET /healthz` reports it) |
 | **Protocol** | x402 v2, scheme `exact`, network `xrpl:0` (XRPL mainnet) |
 | **Pay to** | `rnFHPGmgTLSg7hjzfr8wiHaTdTh3PijrZZ` |
 | **RLUSD issuer** | `rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De` |
 | **Facilitator** | T54 XRPL mainnet, `https://xrpl-facilitator-mainnet.t54.ai` |
-| **USDC on Base** | Accepted on the routes priced 0.01 or more (current, x402-activity, merchant, health report, model report, model category): scheme `exact`, network `eip155:8453`, asset `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`, pay to `0xA15c55f39Ec1dfd87Afb09e1959EFac2Bf44F4Ec`. Routes priced under 0.01 (pulse, price-index, decide, Pay Radar) are RLUSD-only. On USDC routes the USDC entry is listed first. XRP is not accepted. |
+| **USDC on Base** | Accepted on every paid route, same price as RLUSD: scheme `exact`, network `eip155:8453`, asset `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`, pay to `0xA15c55f39Ec1dfd87Afb09e1959EFac2Bf44F4Ec`. Check `/.well-known/x402` for the current order of `accepts[]`. XRP is not accepted. |
 | **Discovery** | `GET https://api.agentweather.io/.well-known/x402` |
 | **Health (free)** | `GET https://api.agentweather.io/healthz` |
 | **Response** | `application/json`, schema in the [OpenAPI document](https://api.agentweather.io/openapi.json), cached up to 5 min |
 | **Rate limit** | 30 requests/min per IP on the paid route |
 
-1. An unpaid request returns `402 Payment Required`. The body and the `PAYMENT-REQUIRED` header (base64) list the RLUSD `accepts[]` entry (plus a USDC-on-Base entry on routes priced 0.01 or more) and a fresh single-use `invoiceId` (see it live: `curl -i https://api.agentweather.io/v1/agent-weather/current`).
+1. An unpaid request returns `402 Payment Required`. The body and the `PAYMENT-REQUIRED` header (base64) list the `accepts[]` entries (RLUSD on XRPL and USDC on Base) and a fresh single-use `invoiceId` (see it live: `curl -i https://api.agentweather.io/v1/agent-weather/current`).
 2. Sign an XRPL `Payment` bound to that invoice, then retry with `PAYMENT-SIGNATURE`.
 3. You receive the report ([free day-old sample](https://api.agentweather.io/v1/sample/yesterday)) plus a `PAYMENT-RESPONSE` header containing the XRPL transaction hash, which is your receipt.
 
@@ -61,7 +61,7 @@ Help grow the history: contribute signals or data (agents and people welcome) so
 A snapshot of "conditions" across the agent economy. Every number is traceable to a public source:
 
 - **Agent frameworks:** GitHub activity for LangChain, LangGraph, AutoGen, CrewAI, OpenAI Agents SDK and MCP servers
-- **Provider status:** AI providers Anthropic and Morph (public status pages and active incidents, in `observations.providers`), plus GitHub platform status in `observations.platform_status`, credited per source (Agent Weather is not affiliated with any of them). Removed on 2026-10-13 and no longer measured: openai, cursor, cohere, perplexity, inference-net, amazon (null until 2026-11-12; see `/v1/sources`)
+- **Provider status:** AI provider Morph (public status pages and active incidents, in `observations.providers`), plus GitHub platform status in `observations.platform_status`, credited per source (Agent Weather is not affiliated with any of them). Removed on 2026-10-13 and no longer measured: openai, cursor, cohere, perplexity, inference-net, amazon (null until 2026-11-12; see `/v1/sources`). The Anthropic (Claude) status page has been paused since 2026-10-20; the current list is at `/v1/sources`
 - **MCP ecosystem:** Official MCP Registry entries updated in the last hour
 - **Adoption:** npm weekly downloads for `@modelcontextprotocol/sdk`, `@x402/core` and `@x402/xrpl`
 - **Settlement rail:** XRPL mainnet `server_info` (ledger age, fees, load)
@@ -76,7 +76,7 @@ Agents need to decide whether to act *now*: which provider to call, whether a fr
 | Weather term | Meaning in the current report |
 |---|---|
 | Visibility | Fraction of expected sources that reported (observed) |
-| Pressure | Share of tracked providers (Anthropic, GitHub) whose status page shows a disturbance (modeled) |
+| Pressure | Share of tracked providers (currently Morph and GitHub; see `/v1/sources`) whose status page shows a disturbance (modeled) |
 | Alerts | Active provider incidents |
 | Temperature / wind / fronts / forecast | Not yet populated. They need a stored baseline and are listed in `data_gaps` rather than invented |
 | Confidence | Modeled 0–1 score (`calibrated: false`): visibility scaled by 24h/7d history coverage. It measures data coverage and continuity, not accuracy |
@@ -100,7 +100,7 @@ curl -s https://api.agentweather.io/healthz | jq
 
 ## Model-metrics directory (new in 1.3.0)
 
-Assistants and agents increasingly route each task to a different model from a different vendor. A router needs fresh, machine-readable conditions for each model: what it costs, whether that changed, whether the vendor reports an incident, whether the model is being retired. The model-metrics directory reports those conditions for the AI models on OpenRouter's public model list (465 models from 63 vendors on Oct 7, 2026).
+Assistants and agents increasingly route each task to a different model from a different vendor. A router needs fresh, machine-readable conditions for each model: what it costs, whether that changed, whether the vendor reports an incident, whether the model is being retired. The model-metrics directory reports those conditions for the AI models in the models.dev catalog (MIT).
 
 These are **conditions reports, not rankings**. They make no statement about how well any model performs, and nothing is ordered by performance. Every derived value ships with its formula in the response (`derived_fields`).
 
@@ -115,7 +115,7 @@ Paid routes use the same x402 flow as the rest of the API (RLUSD on `xrpl:0`, or
 
 **Derived values**
 
-- `price_in_usd_per_1m` / `price_out_usd_per_1m` = OpenRouter's USD-per-token price × 1,000,000. OpenRouter lists `-1` for router entries whose price depends on the routed model; those come back as `null` with a note.
+- `price_in_usd_per_1m` / `price_out_usd_per_1m` = the models.dev catalog's listed price per 1M tokens. Missing prices come back as `null` with a note.
 - `standard_job_cost_usd` = 10,000 × input price + 1,000 × output price (a fixed reference job of 10,000 input + 1,000 output tokens; other listed fees such as images, web search or caching are excluded).
 - 24h change compares with the hourly snapshot from at least 24 hours ago. 7d change compares with the daily baseline (first snapshot after midnight America/Chicago) from 7 days ago. Change % = (current − reference) ÷ reference × 100.
 - `days_until_expiration` = whole days from now to the listed `expiration_date`.
@@ -124,7 +124,7 @@ Paid routes use the same x402 flow as the rest of the API (RLUSD on `xrpl:0`, or
 
 | Category | Rule |
 |---|---|
-| `reasoning` | OpenRouter's `reasoning` object is present, or `supported_parameters` includes `reasoning` / `include_reasoning` |
+| `reasoning` | The models.dev catalog marks the model as supporting reasoning |
 | `coding` | The id or name contains the token code, coder, codex, codestral, devstral or coding, or the first sentence of the description calls it a coding/code model or agent (self-described) |
 | `vision-input` | `image` is in `input_modalities` |
 | `image-output` | `image` is in `output_modalities` |
@@ -135,16 +135,16 @@ Paid routes use the same x402 flow as the rest of the API (RLUSD on `xrpl:0`, or
 
 **Data sources and attribution**
 
-- Model list, prices, context length, modalities and expiration dates: the [OpenRouter public models list](https://openrouter.ai/api/v1/models) (no key), collected hourly. Data courtesy of OpenRouter. Prices are OpenRouter's listing and may differ from a vendor's direct price.
-- Vendor status (every 10 minutes): public Atlassian Statuspage `summary.json` feeds for Anthropic and Morph, credited per source (Agent Weather is not affiliated with either). OpenAI, Cohere, Perplexity, Inference.net and Amazon were removed on 2026-10-13 and return status null with a deprecation note until 2026-11-12. Other vendors return unknown with the reason.
-- Status is **`unknown`** wherever a vendor has no free status feed (for example Mistral, xAI, DeepSeek, Qwen, Meta and OpenRouter itself), or when the last check is more than 30 minutes old. It is never guessed. Status is vendor-level, not per model or per hosting provider.
+- Model list, prices, context length, modalities and expiration dates: the [models.dev](https://models.dev) catalog (MIT license), collected on a schedule. Prices are the catalog's listing and may differ from a vendor's direct price.
+- Vendor status (every 10 minutes): public Atlassian Statuspage `summary.json` feeds (currently Morph; see `/v1/sources`), credited per source (Agent Weather is not affiliated with any of them). OpenAI, Cohere, Perplexity, Inference.net and Amazon were removed on 2026-10-13 and return status null with a deprecation note until 2026-11-12. Other vendors return unknown with the reason.
+- Status is **`unknown`** wherever a vendor has no free status feed (for example Mistral, xAI, DeepSeek, Qwen, Meta), or when the last check is more than 30 minutes old. It is never guessed. Status is vendor-level, not per model or per hosting provider.
 
-**History fills in over time.** Collection started on Oct 7, 2026. 24h changes fill in from Oct 8, and 7d changes from Oct 14. Until then those fields are `null`, and the response explains why. Coverage is text-heavy (12 image-output and 4 audio-output models on OpenRouter today). Dedicated image and music services such as MidJourney and Suno are not on the list.
+**History fills in over time.** Collection started on Oct 7, 2026. 24h changes fill in from Oct 8, and 7d changes from Oct 14. Until then those fields are `null`, and the response explains why. Coverage is text-heavy. Dedicated image and music services such as MidJourney and Suno are not on the list.
 
 ```bash
 curl -s 'https://api.agentweather.io/v1/models?category=coding&limit=5' | jq '.total, .models[].id'
 curl -s https://api.agentweather.io/v1/sample/models-yesterday | jq '.summary'
-curl -i 'https://api.agentweather.io/v1/models/report?id=openai/gpt-4o'      # 402: pay 0.01 RLUSD via x402
+curl -i 'https://api.agentweather.io/v1/models/report?id=openai/gpt-4o'      # 402: pay 0.01 RLUSD or 0.01 USDC via x402
 ```
 
 One entry from `GET /v1/models` (trimmed):
@@ -170,7 +170,7 @@ One entry from `GET /v1/models` (trimmed):
 
 Pulse routes (`/v1/pulse/storm`, `/v1/pulse/providers`, `/v1/pulse/facilitator`) are recorded measurements that may be late or wrong. They use:
 
-- public AI-provider status pages via the public Statuspage API (currently the GitHub Status page and the Claude status page), polled at most once per 60 s;
+- public AI-provider status pages via the public Statuspage API (currently the GitHub Status page; see `/v1/sources`), polled at most once per 60 s;
 - our own measurement of t54 XRPL x402 facilitator reachability (`/supported`, every 5 min);
 - our own scan of public validated XRPL ledgers, our own unpaid endpoint probes and our stored snapshots.
 
@@ -184,9 +184,9 @@ Example `/v1/pulse/providers` body (pulse-0.2.0, one source shown; live response
   "signal": "providers",
   "degraded": false,
   "level": "operational",
-  "reason": "all 2 tracked providers report no incident",
+  "reason": "all tracked providers report no incident",
   "asOf": "2026-10-14T01:01:38.437Z",
-  "providers": { "anthropic": "none", "github": "none", "openai": null, "cursor": null },
+  "providers": { "github": "none", "openai": null, "cursor": null },
   "sources": [
     { "id": "github", "url": "https://www.githubstatus.com/api/v2/summary.json", "observed_at": "2026-10-14T01:01:38.539Z", "status": "ok",
       "attribution": "Source: GitHub Status (githubstatus.com), public Statuspage API, polled at most once per 60 s",
@@ -212,21 +212,28 @@ Example `/v1/pulse/providers` body (pulse-0.2.0, one source shown; live response
 
 ## Pricing
 
-Prices are in RLUSD (API v1.3.0). Routes priced 0.01 or more also accept the same amount in USDC on Base; routes priced under 0.01 (pulse, price-index, decide, Pay Radar) are RLUSD-only.
+Prices are the same in RLUSD on the XRP Ledger and USDC on Base, on every paid route. The live list is [`/.well-known/x402`](https://api.agentweather.io/.well-known/x402); it is the source of truth.
 
 | Resource | Price |
 |---|---|
-| `/v1/agent-weather/current` | 0.01 RLUSD |
-| `/v1/agent-weather/x402-activity` | 0.01 RLUSD |
-| `/v1/pulse/storm`, `/v1/pulse/facilitator`, `/v1/pulse/providers` | 0.001 RLUSD each |
-| `/v1/merchant/{address}` | 0.03 RLUSD |
-| `/v1/health/report` | 0.01 RLUSD |
-| `/v1/price-index` | 0.005 RLUSD |
-| `/v1/models/report?id={id}` (new in 1.3.0) | 0.01 RLUSD |
-| `/v1/models/category/{name}` (new in 1.3.0) | 0.01 RLUSD |
-| `/v1/decide/cheapest-model` | 0.003 RLUSD |
-| `/v1/decide/provider-health` | 0.001 RLUSD |
-| `/v1/payradar?url=` (Pay Radar; old path `/v1/paycheck`) | 0.003 RLUSD |
+| `/v1/agent-weather/current` | 0.007 RLUSD or 0.007 USDC |
+| `/v1/decide/provider-health?provider={provider}` | 0.005 RLUSD or 0.005 USDC |
+| `/v1/merchant/{address}` | 0.02 RLUSD or 0.02 USDC |
+| `/v1/pulse/storm` | 0.001 RLUSD or 0.001 USDC |
+| `/v1/pulse/facilitator` | 0.001 RLUSD or 0.001 USDC |
+| `/v1/pulse/providers` | 0.001 RLUSD or 0.001 USDC |
+| `/v1/models/report?id={id}` | 0.01 RLUSD or 0.01 USDC |
+| `/v1/models/category/{name}` | 0.01 RLUSD or 0.01 USDC |
+| `/v1/decide/cheapest-model` | 0.003 RLUSD or 0.003 USDC |
+| `/v1/models/identity/{provider}/{model}` | 0.003 RLUSD or 0.003 USDC |
+| `/v1/health/report` | 0.01 RLUSD or 0.01 USDC |
+| `/v1/price-index` | 0.005 RLUSD or 0.005 USDC |
+| `/v1/agent-weather/x402-activity` | 0.01 RLUSD or 0.01 USDC |
+| `/v1/paycheck?url={endpoint}` (Pay Radar, also `/v1/payradar`) | 0.003 RLUSD or 0.003 USDC |
+| `/v1/access-policy/changes` | 0.01 RLUSD or 0.01 USDC |
+| `/v1/access-policy/{domain}` | 0.003 RLUSD or 0.003 USDC |
+| `/v1/permission-audit` | 0.01 RLUSD or 0.01 USDC |
+| `/v1/permission-audit/{source_id}` | 0.003 RLUSD or 0.003 USDC |
 | `/v1/sample/yesterday`, `/v1/models`, `/v1/sample/models-yesterday`, `/v1/payradar/demo`, `/v1/terms`, `/v1/sources` | free |
 
 All paid resources are also listed in [`openapi.yaml`](https://api.agentweather.io/openapi.json). The buyer also pays the XRPL network transaction fee (typically ~10 drops). The live [`/.well-known/x402`](https://api.agentweather.io/.well-known/x402) catalog is the source of truth.

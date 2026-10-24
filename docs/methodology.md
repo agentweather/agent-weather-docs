@@ -2,7 +2,7 @@
 
 Applies to report `schema_version` **0.1.0-draft**, which is what the live API serves today (server v1.3.0).
 
-New in 1.3.0, the model-metrics directory (`/v1/models`) is a conditions report on AI models, not a ranking. It uses OpenRouter's public models list and the vendors' free status feeds, and every derived value carries its formula (details in the [README](../README.md#model-metrics-directory-new-in-130)).
+New in 1.3.0, the model-metrics directory (`/v1/models`) is a conditions report on AI models, not a ranking. It uses the models.dev catalog (MIT) and the vendors' free status feeds, and every derived value carries its formula (details in the [README](../README.md#model-metrics-directory-new-in-130)).
 
 ## Principles
 
@@ -16,7 +16,7 @@ New in 1.3.0, the model-metrics directory (`/v1/models`) is a conditions report 
 | Area | Source | Endpoint | Notes |
 |---|---|---|---|
 | Agent frameworks | GitHub REST API | `api.github.com/repos/{owner}/{repo}` for langchain-ai/langchain, langchain-ai/langgraph, microsoft/autogen, crewAIInc/crewAI, openai/openai-agents-python, modelcontextprotocol/servers | Stars, forks, open issues+PRs (GitHub counts PRs as issues), push recency. Subject to GitHub rate limits; on failure the fields are `null` and a gap is recorded. |
-| Provider status | Statuspage v2 | AI providers: Anthropic `status.claude.com`, Morph `status.morphllm.com` (`observations.providers`). Platform: GitHub `www.githubstatus.com` (`observations.platform_status`, since 2026-10-14). Removed 2026-10-13: openai, cursor, cohere, perplexity, inference-net, amazon (null until 2026-11-12) | Indicator, description, degraded components. |
+| Provider status | Statuspage v2 | AI providers: Morph `status.morphllm.com` (Anthropic `status.claude.com` paused since 2026-10-20; see `/v1/sources`) (`observations.providers`). Platform: GitHub `www.githubstatus.com` (`observations.platform_status`, since 2026-10-14). Removed 2026-10-13: openai, cursor, cohere, perplexity, inference-net, amazon (null until 2026-11-12) | Indicator, description, degraded components. |
 | MCP ecosystem | Official MCP Registry | `registry.modelcontextprotocol.io/v0/servers` | Count of server entries updated in the last hour. The registry is in preview (v0). |
 | Adoption | npm downloads API | `api.npmjs.org/downloads/point/last-week/{pkg}` for `@modelcontextprotocol/sdk`, `@x402/core`, `@x402/xrpl` | Weekly downloads; npm data lags ~1–2 days. |
 | Settlement rail | XRPL JSON-RPC `server_info` | xrplcluster.com | Validated ledger sequence and age, base fee, reserve, load factor. Read-only. |
@@ -25,7 +25,7 @@ New in 1.3.0, the model-metrics directory (`/v1/models`) is a conditions report 
 
 | Pulse input | Source | Notes |
 |---|---|---|
-| Provider status | Public Statuspage API: GitHub `www.githubstatus.com`, Anthropic `status.claude.com` | Indicator per page; level = worst; cached 60 s. OpenAI and Cursor are no longer measured in pulse (`null` until 2026-11-12). |
+| Provider status | Public Statuspage API: GitHub `www.githubstatus.com` (see `/v1/sources` for the current list) | Indicator per page; level = worst; cached 60 s. OpenAI and Cursor are no longer measured in pulse (`null` until 2026-11-12). |
 | Facilitator | Own measurement of t54 `/supported` reachability (5 min) plus own XRPL ledger scan | A measurement of reachability and on-ledger success rate, not a statement about T54 Labs. |
 | Fronts | Own stored 15-minute snapshots | First-party. |
 
