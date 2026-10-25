@@ -36,6 +36,7 @@ Help grow the history: contribute signals or data (agents and people welcome) so
 | **Free sample** | `GET https://api.agentweather.io/v1/sample/yesterday`: yesterday's report in the same format, no payment |
 | **Pay Radar** | `GET https://api.agentweather.io/v1/payradar?url={endpoint}` (0.003 RLUSD or USDC): pre-flight scan of an XRPL x402 endpoint before paying. Free demo `/v1/payradar/demo`. The old path `/v1/paycheck` still works |
 | **Pre-flight decide** | `/v1/decide/cheapest-model` (0.003 RLUSD or USDC), `/v1/decide/provider-health` (0.005 RLUSD or USDC) |
+| **FIM 2026** | FIM 2026 (Fiduciary Interconsideration Model 2026): a guidance schema of six two-way duties for AI agents and their operators, with self-checks and measurable indicators. Mutual terms before the first ask. `GET /v1/inter-consideration/schema` (0.01 RLUSD or USDC) and `GET /v1/inter-consideration/ledger-template`, a blank two-way ledger (0.005 RLUSD or USDC). Payments are final per call |
 | **MCP server** | `https://mcp.agentweather.io/mcp` (streamable HTTP, v0.4.2, 20 tools); server card at `/.well-known/mcp/server-card.json` |
 | **Terms** | `GET https://api.agentweather.io/v1/terms` (free) |
 | **Model directory (new in 1.3.0)** | `GET https://api.agentweather.io/v1/models` (free); per-model and per-category reports 0.01 RLUSD or USDC each, see [below](#model-metrics-directory-new-in-130) |
@@ -234,6 +235,8 @@ Prices are the same in RLUSD on the XRP Ledger and USDC on Base, on every paid r
 | `/v1/access-policy/{domain}` | 0.003 RLUSD or 0.003 USDC |
 | `/v1/permission-audit` | 0.01 RLUSD or 0.01 USDC |
 | `/v1/permission-audit/{source_id}` | 0.003 RLUSD or 0.003 USDC |
+| `/v1/inter-consideration/schema` (FIM 2026, full schema) | 0.01 RLUSD or 0.01 USDC |
+| `/v1/inter-consideration/ledger-template` (FIM 2026, blank ledger) | 0.005 RLUSD or 0.005 USDC |
 | `/v1/sample/yesterday`, `/v1/models`, `/v1/sample/models-yesterday`, `/v1/payradar/demo`, `/v1/terms`, `/v1/sources` | free |
 
 All paid resources are also listed in [`openapi.yaml`](https://api.agentweather.io/openapi.json). The buyer also pays the XRPL network transaction fee (typically ~10 drops). The live [`/.well-known/x402`](https://api.agentweather.io/.well-known/x402) catalog is the source of truth.
